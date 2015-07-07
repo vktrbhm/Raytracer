@@ -15,8 +15,8 @@ Sphere::Sphere(glm::vec3 const& center, float radius)
 	std::cout << name_ << ": call sphere user defined constructor_1" << std::endl;	
 }
 
-Sphere::Sphere(glm::vec3 const& center, float radius, Color const& color, std::string const& name)
-  : Shape{color, name}
+Sphere::Sphere(glm::vec3 const& center, float radius, Material const& mat, std::string const& name)
+  : Shape{mat, name}
   , center_{center}
   , radius_{radius}{
   std::cout << name_ << ": call sphere user defined constructor_2" << std::endl;
@@ -38,7 +38,7 @@ float Sphere::getradius() const {
 // Methods
 std::ostream& Sphere::print(std::ostream& os) const {
   os << "sphere( ";
-  shape::print(os);
+  Shape::print(os);
   os << ", center=>(" << center_.x << "," << center_.y << "," << center_.z << "), "
      << "radius=>" << radius_ << " )"<<'\n';
   return os;
@@ -53,8 +53,10 @@ float Sphere::volume() const {
 }
 
 // Not a bool! Rewrite Intersection so it gives you the distance
-bool Sphere::intersect(ray const& ray, float& distance) const {
+
+/*bool Sphere::intersect(Ray const& ray, float& distance) const {
   glm::vec3 v = glm::normalize(ray.direction_); 
 	
 	return glm::intersectRaySphere( ray.origin_ , v , center_ , radius_*radius_ , distance );
 }
+*/

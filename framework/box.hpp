@@ -12,7 +12,7 @@ public:
   // Con-/Destructor
   Box();
   Box(glm::vec3 const& min, glm::vec3 const& max);
-  Box(glm::vec3 const& min, glm::vec3 const& max, Color const& color, std::string const& name);
+  Box(glm::vec3 const& min, glm::vec3 const& max, Material const& mat, std::string const& name);
   ~Box();
 
   // Getter const ref!!

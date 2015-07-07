@@ -7,10 +7,10 @@
 
 #include "fensterchen.hpp"
 
-TEST_CASE("Test_1 sphere","[Default Constructor]")
+TEST_CASE("Test_1 Sphere","[Default Constructor]")
 {
   std::cout<<"-----------------"<<std::endl;	
-	sphere s1{};
+	Sphere s1{};
 
 	REQUIRE(s1.getcenter().x == 0);
 	REQUIRE(s1.getcenter().y == 0);
@@ -22,7 +22,7 @@ TEST_CASE("Test_1 sphere","[Default Constructor]")
 TEST_CASE("Test_2 sphere","[User Constructor 1]")
 {
   std::cout<<"-----------------"<<std::endl;
-	sphere s2{glm::vec3(1,1,1),5};
+	Sphere s2{glm::vec3(1,1,1),5};
 
 	REQUIRE(s2.getcenter().x == 1);
 	REQUIRE(s2.getcenter().y == 1);
@@ -34,7 +34,8 @@ TEST_CASE("Test_2 sphere","[User Constructor 1]")
 TEST_CASE("Test_3 sphere","[User Constructor 2]")
 {
   std::cout<<"-----------------"<<std::endl;
-  sphere s3{glm::vec3(1,1,1),5, Color(1,1,1),"Sphere Test 3"};
+  Material m1{};
+  Sphere s3{glm::vec3(1,1,1),5, m1,"Sphere Test 3"};
 
   REQUIRE(s3.getcenter().x == 1);
   REQUIRE(s3.getcenter().y == 1);
@@ -46,7 +47,7 @@ TEST_CASE("Test_3 sphere","[User Constructor 2]")
 TEST_CASE("Test_4 sphere", "[area]")
 {  
   std::cout<<"-----------------"<<std::endl;
-  sphere s4{glm::vec3(1,1,1),5};
+  Sphere s4{glm::vec3(1,1,1),5};
 
   REQUIRE( Approx(s4.area()) == 314.159 );
 }
@@ -54,7 +55,7 @@ TEST_CASE("Test_4 sphere", "[area]")
 TEST_CASE("Test_5 sphere", "[volume]")
 {  
   std::cout<<"-----------------"<<std::endl;
-  sphere s5{glm::vec3(1,1,1),5};
+  Sphere s5{glm::vec3(1,1,1),5};
 
   REQUIRE( Approx(s5.volume()) == 523.6 );
 }
@@ -64,7 +65,7 @@ TEST_CASE("Test_5 sphere", "[volume]")
 TEST_CASE("Test_1 box", "[default ctor]")
 {  
   std::cout<<"-----------------"<<std::endl;
-  box b1{};
+  Box b1{};
 
   REQUIRE( b1.getmin().x == 0.0);
   REQUIRE( b1.getmin().y == 0.0);
@@ -78,7 +79,7 @@ TEST_CASE("Test_1 box", "[default ctor]")
 TEST_CASE("Test_2 box", "[user Constructor 1]")
 {
   std::cout<<"-----------------"<<std::endl;
-  box b2{ glm::vec3(1,1,1), glm::vec3(2,2,2) };
+  Box b2{ glm::vec3(1,1,1), glm::vec3(2,2,2) };
 
   REQUIRE( b2.getmin().x == 1.0);
   REQUIRE( b2.getmin().y == 1.0);
@@ -92,7 +93,8 @@ TEST_CASE("Test_2 box", "[user Constructor 1]")
 TEST_CASE("Test_3 box", "[user Constructor 2]")
 {
   std::cout<<"-----------------"<<std::endl;
-  box b2{ glm::vec3(1,1,1), glm::vec3(2,2,2), Color(1,1,1), "Box Test_3" };
+  Material m2{};
+  Box b2{ glm::vec3(1,1,1), glm::vec3(2,2,2), m2, "Box Test_3" };
 
   REQUIRE( b2.getmin().x == 1.0);
   REQUIRE( b2.getmin().y == 1.0);
@@ -107,7 +109,7 @@ TEST_CASE("Test_3 box", "[user Constructor 2]")
 TEST_CASE("Test_4 box", "[area]")
 {
   std::cout<<"-----------------"<<std::endl;
-  box b4{ glm::vec3(1,1,1), glm::vec3(2,2,2) };
+  Box b4{ glm::vec3(1,1,1), glm::vec3(2,2,2) };
 
   REQUIRE( b4.getmin().x == 1.0);
   REQUIRE( b4.getmin().y == 1.0);
@@ -122,7 +124,7 @@ TEST_CASE("Test_4 box", "[area]")
 TEST_CASE("Test_5 box", "[volume]")
 {
   std::cout<<"-----------------"<<std::endl;
-  box b5{ glm::vec3(1,1,1), glm::vec3(2,2,2) };
+  Box b5{ glm::vec3(1,1,1), glm::vec3(2,2,2) };
 
   REQUIRE( b5.getmin().x == 1.0);
   REQUIRE( b5.getmin().y == 1.0);
@@ -134,34 +136,45 @@ TEST_CASE("Test_5 box", "[volume]")
   REQUIRE( Approx(b5.volume()) == 1 );
 }
 
+
 //shape - color & name
 
-TEST_CASE("Test_1 Shape default", "[color]")
+TEST_CASE("Test_1 Shape default", "[Material Color Test for ka,kd and ks]")
 {
   std::cout<<"-----------------"<<std::endl;
-  box b1{};
+  Box b1{};
 
   b1.print(std::cout);
 
-  REQUIRE( b1.getcolor().r == 0 );
-  REQUIRE( b1.getcolor().g == 0 );
-  REQUIRE( b1.getcolor().b == 0 );
+  REQUIRE( b1.getmaterial().getKA().r == 1);
+  REQUIRE( b1.getmaterial().getKA().g == 1);
+  REQUIRE( b1.getmaterial().getKA().b == 1);
+
+  REQUIRE( b1.getmaterial().getKD().r == 1);
+  REQUIRE( b1.getmaterial().getKD().g == 1);
+  REQUIRE( b1.getmaterial().getKD().b == 1);
+
+  REQUIRE( b1.getmaterial().getKS().r == 1);
+  REQUIRE( b1.getmaterial().getKS().g == 1);
+  REQUIRE( b1.getmaterial().getKS().b == 1);  
 }
 
 TEST_CASE("Test_2 Shape default", "[name]")
 {
   std::cout<<"-----------------"<<std::endl;
-  sphere s1{};
+  Sphere s1{};
 
   s1.print(std::cout);
   
-  REQUIRE( s1.getname() == "default" );
+  REQUIRE( s1.getname() == "default Shape" );
 }
+
 
 TEST_CASE("Test_3 Shape User", "[name]")
 {
   std::cout<<"-----------------"<<std::endl;
-  sphere s1{glm::vec3(1,1,1),5, Color(1,1,1),"Sphere Name Test"};
+  Material m3{};
+  Sphere s1{glm::vec3(1,1,1),5, m3,"Sphere Name Test"};
 
   s1.print(std::cout);
   
@@ -198,26 +211,26 @@ TEST_CASE("Test intersect", "[intersect]")
   glm::vec3 ray_di(4.0,2.0,1.0);
 
   std::cout<<"-----------------"<<std::endl;
-  ray r1{ray_origin,ray_direction};
-  ray r0{ray_og,ray_di};
+  Ray r1{ray_origin,ray_direction};
+  Ray r0{ray_og,ray_di};
   
   glm::vec3 sphere_center(0.0,0.0,5.0);
   float sphere_radius (1.0);
 
-  sphere s1{sphere_center, sphere_radius};
+  Sphere s1{sphere_center, sphere_radius};
 
   REQUIRE( s1.intersect(r1) == true );
   REQUIRE( s1.intersect(r0) == false );
 }
-
+/*
 TEST_CASE("Test Destructor", "[6.8]")
 {
   std::cout<<"-------S0----------"<<std::endl;
   Color red(255, 0, 0); 
   glm::vec3 position(0,0,0);
-  sphere* s0 = new sphere(position, 1.2, red, "sphere0");
+  Sphere* s0 = new Sphere(position, 1.2, red, "sphere0");
   std::cout<<"--------S1---------"<<std::endl; 
-  shape* s1 = new sphere(position, 1.2, red, "sphere1");
+  Shape* s1 = new Sphere(position, 1.2, red, "sphere1");
   std::cout<<"-----------------"<<std::endl;
   s0->print(std::cout); 
   s1->print(std::cout);
@@ -226,7 +239,7 @@ TEST_CASE("Test Destructor", "[6.8]")
 
 	REQUIRE( true );
 }
-
+*/
 int main(int argc, char *argv[])
 {
   return Catch::Session().run(argc, argv);

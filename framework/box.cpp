@@ -18,9 +18,9 @@ Box::Box(glm::vec3 const& min, glm::vec3 const& max)
 	std::cout << name_ << ": call box user defined constructor 1" << std::endl;
 }
 
-Box::Box(glm::vec3 const& min, glm::vec3 const& max, Color const& color,
+Box::Box(glm::vec3 const& min, glm::vec3 const& max, Material const& mat,
          std::string const& name)
-  : Shape{color, name}
+  : Shape{mat, name}
   , min_{min}
   , max_{max}{
   std::cout << name_ << ": call box user defined constructor 2" << std::endl;
@@ -42,7 +42,7 @@ glm::vec3 Box::getmax() const {
 // Methods
 std::ostream& Box::print(std::ostream& os) const {
   os << "box( ";
-  shape::print(os);
+  Shape::print(os);
   os << ", min=>(" << min_.x << "," << min_.y << "," << min_.z << "), "
      << "max=>(" << max_.x << "," << max_.y << "," << max_.z << ") )";
   return os;
@@ -61,6 +61,6 @@ float Box::volume() const {
 }
 
 bool Box::intersect(Ray const& ray, float& t) {
-    
+
 }
 

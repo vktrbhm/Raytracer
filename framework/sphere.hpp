@@ -15,7 +15,7 @@ public:
   // Con-/Destructor
   Sphere();
   Sphere(glm::vec3 const& center, float radius);
-  Sphere(glm::vec3 const& center, float radius, Color const& color, std::string const& name);
+  Sphere(glm::vec3 const& center, float radius, Material const& mat, std::string const& name);
   ~Sphere();
 
   // Getter
@@ -27,7 +27,7 @@ public:
   float area() const override;
   float volume() const override;
 
-  bool intersect(ray const& ray, float& ) const;
+  //bool intersect(Ray const& ray, float& ) const ;
 
 private:
   glm::vec3 center_;

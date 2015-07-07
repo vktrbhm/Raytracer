@@ -7,7 +7,9 @@
 #include "color.hpp"
 
 
-class Material {
+
+class Material 
+{
 public:
 	// Con-/Destructor
 	Material();
@@ -20,6 +22,9 @@ public:
 	Color getKD() const;
 	Color getKS() const;
 	float getM() const;
+
+	std::ostream& print(std::ostream& os) const;
+	friend std::ostream& operator<<(std::ostream& os, Material const& mat);
 
 
 private:

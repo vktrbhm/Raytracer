@@ -1,7 +1,8 @@
 #ifndef BUW_SHAPE_HPP
 #define BUW_SHAPE_HPP
 
-#include "color.hpp"
+#include "material.hpp"
+#include "ray.hpp"
 
 #include <string>
 
@@ -10,26 +11,26 @@ class Shape
 public:
   // Con-/Destructor
   Shape();
-  Shape(Color const& color, std::string const& name);
+  Shape(Material const& mat, std::string const& name);
 
-   ~Shape();                                        // Weglassen von "virtual" -> Methode wird verdeckt
-  //virtual ~shape();
+                                          // Weglassen von "virtual" -> Methode wird verdeckt
+  virtual ~Shape();
 
   // Getter
-  Color getcolor() const;
+  Material getmaterial() const;
   std::string getname() const;
 
   // Methods
   virtual float area() const = 0;
   virtual float volume() const = 0;
-  virtual bool intersect(Ray const& ray, float& t) = 0;
+  //virtual bool intersect(Ray const& ray, float& t) = 0;
   virtual std::ostream& print(std::ostream& os) const;
 
 
-  friend std::ostream& operator<<(std::ostream& os, shape const& s);
+  friend std::ostream& operator<<(std::ostream& os, Shape const& s);
 
 protected:
-  Color color_;
+  Material mat_;
   std::string name_;
 };
 

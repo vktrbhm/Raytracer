@@ -2,13 +2,13 @@
 
 //Con-/Destructor
 Shape::Shape()
-  : color_{0,0,0}
-  , name_{"default"}{
+  : mat_{Material{}}
+  , name_{"default Shape"}{
   std::cout << name_ << ": call shape default constructor" << std::endl;
 }
 
-Shape::Shape(Color const& color, std::string const& name)
-  : color_{color}
+Shape::Shape(Material const& mat, std::string const& name)
+  : mat_{mat}
   , name_{name}{
   std::cout << name_ << ": call shape user defined constructor" << std::endl;
 }
@@ -18,8 +18,8 @@ Shape::~Shape(){
 }
 
 //Getter
-Color Shape::getcolor() const {
-  return color_;
+Material Shape::getmaterial() const {
+  return mat_;
 }
 
 std::string Shape::getname() const {
@@ -29,10 +29,10 @@ std::string Shape::getname() const {
 // Methods
 std::ostream& Shape::print(std::ostream& os) const {
   os << "shape( name=>\"" << name_ << "\", "
-     << "color=>(" << color_.r << "," << color_.g << "," << color_.b << ") )"<<'\n';
+     << "Material =>(" << mat_.getname() <<'\n';
   return os;
 }
 
-std::ostream& operator<<(std::ostream& os, shape const& s) {
+std::ostream& operator<<(std::ostream& os, Shape const& s) {
   return s.print(os);
 }

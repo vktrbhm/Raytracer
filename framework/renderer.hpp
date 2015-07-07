@@ -10,7 +10,7 @@
 #ifndef BUW_RENDERER_HPP
 #define BUW_RENDERER_HPP
 
-#include "Color.hpp"
+#include "color.hpp"
 #include "pixel.hpp"
 #include "ppmwriter.hpp"
 #include <string>
