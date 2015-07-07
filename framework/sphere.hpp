@@ -9,14 +9,14 @@
 #include <glm/vec3.hpp>
 #include <cmath>
 
-class sphere : public shape
+class Sphere : public Shape
 {
 public:
   // Con-/Destructor
-  sphere();
-  sphere(glm::vec3 const& center, float radius);
-  sphere(glm::vec3 const& center, float radius, Color const& color, std::string const& name);
-  ~sphere();
+  Sphere();
+  Sphere(glm::vec3 const& center, float radius);
+  Sphere(glm::vec3 const& center, float radius, Color const& color, std::string const& name);
+  ~Sphere();
 
   // Getter
   glm::vec3 getcenter() const;

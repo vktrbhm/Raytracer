@@ -4,43 +4,43 @@
 #include <glm/glm.hpp>
 
 // Con-/Destructor
-box::box()
-  : shape{}
+Box::Box()
+  : Shape{}
   , min_{0,0,0}
   , max_{0,0,0}{
   std::cout << name_ << ": call box default constructor" << std::endl;
 }
 
-box::box(glm::vec3 const& min, glm::vec3 const& max)
-	: shape{}
+Box::Box(glm::vec3 const& min, glm::vec3 const& max)
+	: Shape{}
 	, min_{min}
 	, max_{max}{
 	std::cout << name_ << ": call box user defined constructor 1" << std::endl;
 }
 
-box::box(glm::vec3 const& min, glm::vec3 const& max, Color const& color,
+Box::Box(glm::vec3 const& min, glm::vec3 const& max, Color const& color,
          std::string const& name)
-  : shape{color, name}
+  : Shape{color, name}
   , min_{min}
   , max_{max}{
   std::cout << name_ << ": call box user defined constructor 2" << std::endl;
 }
 
-box::~box(){
+Box::~Box(){
   std::cout << name_ << ": call box destructor" << std::endl;
 }
 
 // Getter
-glm::vec3 box::getmin() const {
+glm::vec3 Box::getmin() const {
 	return min_;
 }
 
-glm::vec3 box::getmax() const {
+glm::vec3 Box::getmax() const {
 	return max_;
 }
 
 // Methods
-std::ostream& box::print(std::ostream& os) const {
+std::ostream& Box::print(std::ostream& os) const {
   os << "box( ";
   shape::print(os);
   os << ", min=>(" << min_.x << "," << min_.y << "," << min_.z << "), "
@@ -48,15 +48,19 @@ std::ostream& box::print(std::ostream& os) const {
   return os;
 }
 
-float box::area() const {
+float Box::area() const {
   return 2*std::fabs(max_.x - min_.x)*std::fabs(max_.y - min_.y) +
          2*std::fabs(max_.x - min_.x)*std::fabs(max_.z - min_.z) +
          2*std::fabs(max_.y - min_.y)*std::fabs(max_.z - min_.z);
 }
 
-float box::volume() const {
+float Box::volume() const {
   return (max_.x - min_.x)*
          (max_.y - min_.y)*
          (max_.z - min_.z);
+}
+
+bool Box::intersect(Ray const& ray, float& t) {
+    
 }
 

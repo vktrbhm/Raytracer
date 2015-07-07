@@ -1,42 +1,42 @@
 #include "sphere.hpp"
 
 // COn-/Destructor
-sphere::sphere()
-  : shape{}
+Sphere::Sphere()
+  : Shape{}
   , center_{0,0,0}
   , radius_{1}{
   std::cout << name_ << ": call sphere default constructor" << std::endl;
 }
 
-sphere::sphere(glm::vec3 const& center, float radius)
-	: shape{}
+Sphere::Sphere(glm::vec3 const& center, float radius)
+	: Shape{}
 	, center_{center}
 	, radius_{radius}{
 	std::cout << name_ << ": call sphere user defined constructor_1" << std::endl;	
 }
 
-sphere::sphere(glm::vec3 const& center, float radius, Color const& color, std::string const& name)
-  : shape{color, name}
+Sphere::Sphere(glm::vec3 const& center, float radius, Color const& color, std::string const& name)
+  : Shape{color, name}
   , center_{center}
   , radius_{radius}{
   std::cout << name_ << ": call sphere user defined constructor_2" << std::endl;
 }
 
-sphere::~sphere(){
+Sphere::~Sphere(){
   std::cout << name_ << ": call sphere destructor" << std::endl;
 }
 
 // Getter
-glm::vec3 sphere::getcenter() const {
+glm::vec3 Sphere::getcenter() const {
 	return center_;
 }
 
-float sphere::getradius() const {
+float Sphere::getradius() const {
 	return radius_;
 }
 
 // Methods
-std::ostream& sphere::print(std::ostream& os) const {
+std::ostream& Sphere::print(std::ostream& os) const {
   os << "sphere( ";
   shape::print(os);
   os << ", center=>(" << center_.x << "," << center_.y << "," << center_.z << "), "
@@ -44,15 +44,16 @@ std::ostream& sphere::print(std::ostream& os) const {
   return os;
 }
 
-float sphere::area() const {
+float Sphere::area() const {
   return 4*M_PI*pow(radius_,2);
 }
 
-float sphere::volume() const {
+float Sphere::volume() const {
   return (4/3.0f)*M_PI*pow(radius_,3);
 }
 
-bool sphere::intersect(ray const& ray, float& distance) const {
+// Not a bool! Rewrite Intersection so it gives you the distance
+bool Sphere::intersect(ray const& ray, float& distance) const {
   glm::vec3 v = glm::normalize(ray.direction_); 
 	
 	return glm::intersectRaySphere( ray.origin_ , v , center_ , radius_*radius_ , distance );

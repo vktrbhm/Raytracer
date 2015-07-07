@@ -6,15 +6,14 @@
 
 #include <glm/vec3.hpp>
 
-class box : public shape
+class Box : public Shape
 {
 public:
   // Con-/Destructor
-  box();
-  box(glm::vec3 const& min, glm::vec3 const& max);
-  box(glm::vec3 const& min, glm::vec3 const& max, Color const& color,
-      std::string const& name);
-  ~box();
+  Box();
+  Box(glm::vec3 const& min, glm::vec3 const& max);
+  Box(glm::vec3 const& min, glm::vec3 const& max, Color const& color, std::string const& name);
+  ~Box();
 
   // Getter const ref!!
   glm::vec3 getmin() const;
@@ -24,6 +23,7 @@ public:
   std::ostream& print(std::ostream& os) const;
   float area() const override;
   float volume() const override;
+  bool intersect(Ray const& ray, float& t);
   
 private:
   glm::vec3 min_;

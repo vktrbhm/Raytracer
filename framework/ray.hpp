@@ -3,9 +3,9 @@
 
 #include <glm/vec3.hpp>
 
-struct ray
+struct Ray
 {
-  ray(glm::vec3 const& o, glm::vec3 const& d)
+  Ray(glm::vec3 const& o, glm::vec3 const& d)
     : origin_{o}
     , direction_{d}
   {}
