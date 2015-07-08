@@ -52,11 +52,12 @@ float Sphere::volume() const {
   return (4/3.0f)*M_PI*pow(radius_,3);
 }
 
-// Not a bool! Rewrite Intersection so it gives you the distance
 
-/*bool Sphere::intersect(Ray const& ray, float& distance) const {
-  glm::vec3 v = glm::normalize(ray.direction_); 
+
+std::pair<bool,float> Sphere::intersect(Ray const& ray, float& t) const {
+  auto n_ray = glm::normalize(ray.direction_);
+
+  bool intersect = glm::intersectRaySphere(ray.origin_, n_ray, center_, radius_*radius_, t);
 	
-	return glm::intersectRaySphere( ray.origin_ , v , center_ , radius_*radius_ , distance );
+	return std::make_pair(t,intersect);
 }
-*/

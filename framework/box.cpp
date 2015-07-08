@@ -60,7 +60,44 @@ float Box::volume() const {
          (max_.z - min_.z);
 }
 
-bool Box::intersect(Ray const& ray, float& t) {
+std::pair<bool,float> Box::intersect(Ray const& ray, float& t) const {
+
+  glm::vec3 dirfrac{0,0,0};
+
+  glm::vec3 r = glm::normalize(ray.direction_);
+
+  dirfrac.x = 1.0f / r.x;
+  dirfrac.y = 1.0f / r.y;
+  dirfrac.z = 1.0f / r.z;
+
+  float t1 = (min_.x - ray.origin_.x) * dirfrac.x;
+  float t2 = (max_.x - ray.origin_.x) * dirfrac.x;
+  float t3 = (min_.y - ray.origin_.y) * dirfrac.y;
+  float t4 = (max_.y - ray.origin_.y) * dirfrac.y;
+  float t5 = (min_.z - ray.origin_.z) * dirfrac.z;
+  float t6 = (max_.z - ray.origin_.z) * dirfrac.z;
+
+  float tmin = std::max(
+    std::max(std::min(t1,t2), std::min(t3,t4)), std::min(t5,t6));
+
+  float tmax = std::min(
+    std::min(std::max(t1,t2), std::max(t3,t4)), std::max(t5,t6));
+
+  if (tmax < 0) {
+    t = tmax;
+
+    return std::make_pair(t,false);
+  }
+
+  if (tmin > tmax) {
+    t = tmax;
+
+    return std::make_pair(t,false); 
+  }
+
+  t = tmin;
+  return std::make_pair(t,true);
+
 
 }
 

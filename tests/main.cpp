@@ -201,26 +201,17 @@ TEST_CASE("intersectRaySphere", "[intersect]")
   REQUIRE(distance == Approx(4.0f)); 
 }
 
-TEST_CASE("Test intersect", "[intersect]")
+TEST_CASE("Test Sphere intersect", "[intersect]")
 {
-  
-  glm::vec3 ray_origin(0.0,0.0,0.0);
-  glm::vec3 ray_direction(0.0,0.0,1.0);
+  auto s = std::make_shared<Sphere> (glm::vec3{0.0,0.0,5.0},1.0, Material{}, "Test_Sphere");
+  Ray r(glm::vec3{0.0,0.0,0.0},glm::vec3{0.0,0.0,1.0});
 
-  glm::vec3 ray_og(5.0,5.0,5.0);
-  glm::vec3 ray_di(4.0,2.0,1.0);
+  float t = 0.0;
+  auto intersection = s -> intersect(r,t);
 
-  std::cout<<"-----------------"<<std::endl;
-  Ray r1{ray_origin,ray_direction};
-  Ray r0{ray_og,ray_di};
-  
-  glm::vec3 sphere_center(0.0,0.0,5.0);
-  float sphere_radius (1.0);
+  REQUIRE(intersection.first == true);
+  REQUIRE(intersection.second == 4.0);
 
-  Sphere s1{sphere_center, sphere_radius};
-
-  REQUIRE( s1.intersect(r1) == true );
-  REQUIRE( s1.intersect(r0) == false );
 }
 /*
 TEST_CASE("Test Destructor", "[6.8]")

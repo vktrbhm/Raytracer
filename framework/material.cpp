@@ -7,9 +7,7 @@ Material::Material()
 	, ka_{1,1,1}
 	, kd_{1,1,1}
 	, ks_{1,1,1}
-	, m_{10} {
-
-	}
+	, m_{10} {}
 	 
 
 Material::Material(std::string const& name, Color const& ka, Color const& kd, Color const& ks, float m) 
@@ -17,9 +15,7 @@ Material::Material(std::string const& name, Color const& ka, Color const& kd, Co
 	, ka_{ka}
 	, kd_{kd}
 	, ks_{ks}
-	, m_{m} {
-
-	}
+	, m_{m} {}
 
 Material::~Material(){}
 

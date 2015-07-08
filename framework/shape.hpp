@@ -11,9 +11,7 @@ class Shape
 public:
   // Con-/Destructor
   Shape();
-  Shape(Material const& mat, std::string const& name);
-
-                                          // Weglassen von "virtual" -> Methode wird verdeckt
+  Shape(Material const& mat, std::string const& name);                                         
   virtual ~Shape();
 
   // Getter
@@ -23,6 +21,7 @@ public:
   // Methods
   virtual float area() const = 0;
   virtual float volume() const = 0;
+  virtual std::pair<bool,float> intersect(Ray const& ray,float& t) const = 0; 
   //virtual bool intersect(Ray const& ray, float& t) = 0;
   virtual std::ostream& print(std::ostream& os) const;
 
