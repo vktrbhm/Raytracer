@@ -60,7 +60,7 @@ float Box::volume() const {
          (max_.z - min_.z);
 }
 
-std::pair<bool,float> Box::intersect(Ray const& ray, float& t) const {
+bool Box::intersect(Ray const& ray, float& t) const {
 
   glm::vec3 dirfrac{0,0,0};
 
@@ -86,18 +86,29 @@ std::pair<bool,float> Box::intersect(Ray const& ray, float& t) const {
   if (tmax < 0) {
     t = tmax;
 
-    return std::make_pair(t,false);
+    std::cout << "------Box Is behind us---------------" << t << std::endl; 
+    std::cout << "Distance: " << t << std::endl; 
+    std::cout << "---------------------" << t << std::endl; 
+
+    return t;
   }
 
   if (tmin > tmax) {
     t = tmax;
 
-    return std::make_pair(t,false); 
+    std::cout << "---------No Intersect------------" << t << std::endl; 
+    std::cout << "Distance: " << t << std::endl; 
+    std::cout << "---------------------" << t << std::endl; 
+
+    return t; 
   }
 
   t = tmin;
-  return std::make_pair(t,true);
 
+    std::cout << "----------Right in the Box-----------" << t << std::endl; 
+    std::cout << "Distance: " << t << std::endl; 
+    std::cout << "---------------------" << t << std::endl; 
 
+  return t;
 }
 

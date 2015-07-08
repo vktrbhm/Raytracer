@@ -54,10 +54,14 @@ float Sphere::volume() const {
 
 
 
-std::pair<bool,float> Sphere::intersect(Ray const& ray, float& t) const {
+bool Sphere::intersect(Ray const& ray, float& t) const {
   auto n_ray = glm::normalize(ray.direction_);
-
   bool intersects = glm::intersectRaySphere(ray.origin_, n_ray, center_, radius_*radius_, t);
 	
-	return std::make_pair(t,intersects);
+  std::cout << "---------------------" << t << std::endl; 
+  std::cout << "Distance: " << t << std::endl; 
+  std::cout << "---------------------" << t << std::endl; 
+
+
+	return t;
 }

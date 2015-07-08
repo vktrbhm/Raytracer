@@ -27,7 +27,7 @@ public:
   float area() const override;
   float volume() const override;
 
-  std::pair<bool,float> intersect(Ray const& ray, float& t) const override ;
+  bool intersect(Ray const& ray, float& t) const override ;
 
 private:
   glm::vec3 center_;

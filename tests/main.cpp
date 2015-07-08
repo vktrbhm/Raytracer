@@ -201,28 +201,33 @@ TEST_CASE("intersectRaySphere", "[intersect]")
   REQUIRE(distance == Approx(4.0f)); 
 }
 
-TEST_CASE("Test Sphere intersect", "[intersect]")
+TEST_CASE("Test Sphere intersection", "[intersect]")
 {
-  auto s = std::make_shared<Sphere> (glm::vec3{3.0,3.0,3.0},2.0, Material{}, "Test_Sphere");
-  Ray r(glm::vec3{0.0,0.0,0.0},glm::vec3{3.0,3.0,3.0});
 
-  float t = 10.0;
+  auto s = std::make_shared<Sphere> (glm::vec3{0.0,0.0,4.0},3.0, Material{}, "Test_Sphere");
+  Ray r(glm::vec3{0.0,0.0,0.0},glm::vec3{1.0,1.0,1.0});
+
+  float t = 1.0;
   auto intersection = s->intersect(r,t);
 
-  REQUIRE(intersection.first == true);
-  REQUIRE(intersection.second == 0.0);
-
+  REQUIRE (t == 1);
 }
 
-TEST_CASE("test box intersection", "[box][intersect]")
+TEST_CASE("Test Box intersection", "[intersect]")
 {
-  auto b = std::make_shared<Box>(glm::vec3{1,1,1},glm::vec3{5,5,5},Material{},"box0");
-  Ray r{glm::vec3{0,0,0},glm::vec3{1.0,1.0,1.0}};
+  auto b = std::make_shared<Box> (glm::vec3{1,1,1},glm::vec3{2,2,2}, Material{}, "Test Box");
+  Ray r(glm::vec3{0.0,0.0,0.0},glm::vec3{1.0,1.0,1.0});
 
-  float t = 10.0;
-  REQUIRE( b->intersect(r,t).first == true );
-  REQUIRE( Approx(b->intersect(r,t).second) == 1.732050808 );
+  float t = 1.73205;
+  auto intersection = b->intersect(r,t);
+
+  REQUIRE (t == Approx(0));
+  
+
 }
+
+
+
 /*
 TEST_CASE("Test Destructor", "[6.8]")
 {
