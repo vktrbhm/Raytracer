@@ -218,10 +218,10 @@ TEST_CASE("Test Box intersection", "[intersect]")
   auto b = std::make_shared<Box> (glm::vec3{1,1,1},glm::vec3{2,2,2}, Material{}, "Test Box");
   Ray r(glm::vec3{0.0,0.0,0.0},glm::vec3{1.0,1.0,1.0});
 
-  float t = 1.73205;
+  float t = 0.0;
   auto intersection = b->intersect(r,t);
 
-  REQUIRE (t == Approx(0));
+  REQUIRE (t == Approx(2));
   
 
 }

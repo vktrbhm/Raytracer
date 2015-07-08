@@ -63,12 +63,13 @@ float Box::volume() const {
 bool Box::intersect(Ray const& ray, float& t) const {
 
   glm::vec3 dirfrac{0,0,0};
-
+  // Normalize the Ray
   glm::vec3 r = glm::normalize(ray.direction_);
-
   dirfrac.x = 1.0f / r.x;
   dirfrac.y = 1.0f / r.y;
   dirfrac.z = 1.0f / r.z;
+
+
 
   float t1 = (min_.x - ray.origin_.x) * dirfrac.x;
   float t2 = (max_.x - ray.origin_.x) * dirfrac.x;
